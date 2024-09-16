@@ -1,7 +1,7 @@
 version: v1.1.0
 steps:
 # Build target image
-- build: -t {{.Run.Registry}}/multi-step-taks:{{.Run.ID}} -f Dockerfile .
+- build: -t {{.Run.Registry}}/multi-step-task:{{.Run.ID}} -f Dockerfile .
 # Run image 
 - cmd: -t {{.Run.Registry}}/multi-step-task:{{.Run.ID}}
   id: test
