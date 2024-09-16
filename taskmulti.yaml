@@ -1,0 +1,15 @@
+version: v1.1.0
+steps:
+# Build target image
+- build: -t {{.Run.Registry}}/multi-step-taks:{{.Run.ID}} -f Dockerfile .
+# Run image 
+- cmd: -t {{.Run.Registry}}/multi-step-task:{{.Run.ID}}
+  id: test
+  detach: true
+  ports: ["8080:80"]
+- cmd: docker ps -a
+- cmd: docker stop test
+- cmd: docker ps -a
+# Push image
+- push:
+  - {{.Run.Registry}}/multi-step-task:{{.Run.ID}}
